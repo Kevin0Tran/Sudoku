@@ -1,26 +1,38 @@
 import numpy as np
-s =  np.array([[1,12,131,14,5,6,7,8,9],
-    [1,0,0,0,0,0,0,0,0],
-    [1,0,0,0,0,0,0,0,0],
-    [1,0,0,0,0,0,0,0,0],
-    [2,0,0,0,0,0,0,0,0],
-    [3,0,0,0,0,0,0,0,0],
-    [9,0,0,0,0,0,0,0,0],
-    [5,0,0,0,0,0,0,0,0],
-    [6,0,0,0,0,0,0,0,0]])
+s =  np.array([[0,7,9,1,3,2,0,8,5],
+                [0,6,0,5,9,0,7,0,0],
+                [5,0,8,7,0,0,2,1,0],
+                [0,0,0,8,0,0,9,0,0],
+                [7,0,6,3,4,0,0,0,0],
+                [8,0,1,2,0,0,4,0,3],
+                [0,8,7,0,0,0,3,0,0],
+                [9,0,3,0,0,0,5,0,8],
+                [2,5,0,0,0,0,1,9,0]])
 
-def possible(number,row, column, matrix):
-        for a in range(0,9):
+def solver(number,row, column, matrix):
+        for a in range(0,9): #checks by  row
             if number == matrix[row][a]:
                 return False
-            for b in range(0,9):   #checks the column
-                if number == matrix[b][column]:
+        for b in range(0,9):  #checks by column
+            if number == matrix[b][column]:
+                return False
+        x0 = (row//3)*3
+        y0 = (column//3)*3
+        for i in range(0,3): #checks by 3x3 grid
+            for j in range(0,3):
+                if number == matrix[x0+i][y0+j]:
                     return False
-        x0 = (x//3)*3 #how to check the  3X3 matrix slice
-        y0 = (y//3)*3
-    for i in range(0,3):
-        for j in range(0,3):
+        return True
 
+def sudoku(matrix):
+    for column in range(0,9):
+        for row in range(0,9):
+            if matrix[column][row] == 0:
+                for number in range (1,9):
+                        if (solver(number,row,column,matrix)) == True:
+                            matrix[column][row] = number
+                        else: matrix[column][row] = 0
+    #sudoku(matrix)
+    print(matrix)
 
-
-print(possible(4,s))
+sudoku(s)
