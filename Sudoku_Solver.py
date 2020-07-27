@@ -11,10 +11,10 @@ s =  np.array([[0,7,9,1,3,2,0,8,5],
 
 def solver(number,row, column, matrix):
         for a in range(0,9): #checks by  row
-            if number == matrix[row][a]:
+            if number == matrix[column][a]:
                 return False
         for b in range(0,9):  #checks by column
-            if number == matrix[b][column]:
+            if number == matrix[b][row]:
                 return False
         x0 = (row//3)*3
         y0 = (column//3)*3
@@ -28,12 +28,12 @@ def sudoku(matrix):
     #checks each column and row for  0-9 to see if it fits in spots with 0
     for column in range(0,9):
         for row in range(0,9):
-                for number in range (1,9):
-                    if matrix[column][row] == 0:
-                        if (solver(number,row,column,matrix)) == True:
-                            matrix[column][row] = number
-                        else: matrix[column][row] = 0 #not sure f I need, will double check tomorrow
-                    sudoku(matrix)
+            if matrix[column][row] == 0:
+                for number in range (1,10):
+                    if solver(number,row,column,matrix):
+                        matrix[column][row] = number
+                sudoku(matrix)
+            
     print(matrix)
 
 sudoku(s)
