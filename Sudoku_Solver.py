@@ -25,13 +25,14 @@ def solver(number,row, column, matrix):
         return True
 
 def sudoku(matrix):
+    #checks each column and row for  0-9 to see if it fits in spots with 0
     for column in range(0,9):
         for row in range(0,9):
             if matrix[column][row] == 0:
                 for number in range (1,9):
                         if (solver(number,row,column,matrix)) == True:
                             matrix[column][row] = number
-                        else: matrix[column][row] = 0
+                        else: matrix[column][row] = 0 #not sure f I need, will double check tomorrow
     #sudoku(matrix)
     print(matrix)
 
