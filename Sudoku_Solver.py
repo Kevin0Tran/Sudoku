@@ -1,13 +1,13 @@
 import numpy as np
-s =  np.array([[5,0,0,0,8,0,0,4,9],
-                [0,0,0,5,0,0,0,3,0],
-                [0,6,7,3,0,0,0,0,1],
-                [1,5,0,0,0,0,0,0,0],
-                [0,0,0,2,0,8,0,0,0],
-                [0,0,0,0,0,0,0,1,8],
-                [7,0,0,0,0,4,1,5,0],
-                [0,3,0,0,0,2,0,0,0],
-                [4,9,0,0,5,0,0,0,3]])
+s =  np.array([[0,7,9,1,3,2,0,8,5],
+                [0,6,0,5,9,8,7,3,0],
+                [5,0,8,7,6,0,2,1,0],
+                [0,0,0,8,0,0,9,0,0],
+                [7,0,6,3,4,0,0,0,0],
+                [8,0,1,2,0,0,4,0,3],
+                [0,8,7,0,0,0,3,0,0],
+                [9,0,3,0,0,0,5,0,8],
+                [2,5,0,0,0,0,1,9,0]])
 
 def solver(number,row, column, matrix):
         for a in range(0,9): #checks by  row
@@ -32,8 +32,10 @@ def sudoku(matrix):
                 for number in range (1,10):
                     if solver(number,row,column,matrix):
                         matrix[column][row] = number
-                sudoku(matrix)
-            #return
+                        sudoku(matrix)
+                        matrix[column][row] = 0
+                        print(matrix)
+                return
     print(matrix)
 
 sudoku(s)
